@@ -9,8 +9,9 @@ const cookieParser = require('cookie-parser');
 const productRoute = require('./routes/products');
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+
 const store = new MongoDBStore({
-  uri: "mongodb+srv://irfanopc:irfanopc@nodeexpressproject.afitwap.mongodb.net/session-store?retryWrites=true&w=majority",
+  uri: process.env.MONGO_SESSION,
   collection: "sessions"
 });
 
@@ -43,7 +44,7 @@ app.get('/', (req, res) => {
 app.use('/',user)
 app.use('/',productRoute)
 mongoose.set('strictQuery', false)
-mongoose.connect('mongodb+srv://irfanopc:irfanopc@nodeexpressproject.afitwap.mongodb.net/eshop?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => console.log('DB CONNECTED')).catch((err) => console.log('DB CONNECTION ERROR', err));
