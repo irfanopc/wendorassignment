@@ -1,0 +1,6 @@
+#id:after {
+  content: "click delete icon to remove cart";
+}
+.chair:hover #id:after {
+  content: "this is my cart item";
+}
