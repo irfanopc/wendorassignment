@@ -36,8 +36,8 @@ function Register() {
         if (data.message) {
           return alert(data.message);
         }
-         window.localStorage.setItem("id", data.user._id)
-         
+        
+   
 
         alert(`user signup successfully`);
         navigator("/");

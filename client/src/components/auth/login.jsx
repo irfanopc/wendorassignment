@@ -7,9 +7,10 @@ function Login() {
     username: "",
     password: "",
     otp: "",
-    phoneNumber: null,
+    phoneNumber: Number,
   });
-  const onSignin = (e) => {
+
+  var onSignin = (e) => {
     e.preventDefault();
 
     fetch("http://localhost:5000/login", {
@@ -29,15 +30,20 @@ function Login() {
         if (data.message) {
           return alert(data.message);
         }
+        // window.localStorage.setItem("username", data.user.username);
+        // window.localStorage.setItem("id", data.user._id)
+        // window.localStorage.setItem("token", data.token);
+        window.localStorage.setItem("id", data.user._id);
+        window.localStorage.setItem("username", data.user.username);
         window.localStorage.setItem("token", data.token);
-        alert(`user signin successfully`);
-        // navigator("/");
       });
   };
-  const id = localStorage.getItem("id");
-  console.log(id);
+
+ 
   const onVerify = (e) => {
     e.preventDefault();
+    const id = window.localStorage.getItem("id");
+    console.log(id);
     fetch(`http://localhost:5000/verify-otp/${id}`, {
       method: "post",
       headers: {
@@ -48,16 +54,13 @@ function Login() {
       }),
     })
       .then((res) => res.json())
+     
       .then((data) => {
+        
         console.log(data);
         if (data.message) {
           return alert(data.message);
         }
-
-        window.localStorage.setItem("id", data.user._id);
-
-        window.localStorage.setItem("username", data.user.username);
-        window.localStorage.setItem("token", data.token);
         alert(`user signin successfully`);
         navigator("/");
       });
@@ -111,7 +114,6 @@ function Login() {
               type="number"
               placeholder="otp"
               name="otp"
-              required
               onChange={(e) => {
                 setSigninData({ ...signinData, otp: e.target.value });
               }}
