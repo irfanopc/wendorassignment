@@ -9,13 +9,13 @@ function CartItems({ id, imageUrl, onDelete }) {
             <div id="edit">
               <img
                 src="https://www.svgrepo.com/show/21045/delete-button.svg"
-                alt="edit"
+                alt="delete"
                 onClick={() => onDelete(taskID)}
               />
             </div>
           </article>
           <div className="main-image">
-            <img src={imageUrl} alt="chair" />
+            <img src={imageUrl} alt="image" />
           </div>
         </section>
         <div id="name">beverage vending machine</div>
