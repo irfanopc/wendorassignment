@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "../Header/Header";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 function Home() {
+ const navigator = useNavigate()
   const [imageUrl, setImageUrl] = useState("");
   console.log(imageUrl);
   const username = window.localStorage.getItem("username");
@@ -11,7 +13,7 @@ function Home() {
     // setCartItems([...cartItems,{imageUrl : e.target.src , id : cartItems.length+1}])
     setImageUrl(e.target.src);
     try {
-      const response = await fetch("http://localhost:5000/addcart", {
+      const response = await fetch("https://wendor-b4xi.onrender.com/addcart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +26,7 @@ function Home() {
         const data = await response.json();
         console.log(data);
       } else if (response.status === 401) {
-        window.location.href = "http://localhost:3000/login"; // Redirect to login page
+        navigator ("/login") // Redirect to login page
       }
     } catch (error) {
       console.log(error);

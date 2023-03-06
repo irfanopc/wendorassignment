@@ -18,7 +18,7 @@ function Register() {
     if (data.password !== data.cpassword) {
       return alert(`password doesn't match`);
     }
-    fetch("http://localhost:5000/register", {
+    fetch("https://wendor-b4xi.onrender.com/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

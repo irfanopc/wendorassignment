@@ -13,7 +13,7 @@ function Login() {
   var onSignin = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/login", {
+    fetch("https://wendor-b4xi.onrender.com/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ function Login() {
     e.preventDefault();
     const id = window.localStorage.getItem("id");
     console.log(id);
-    fetch(`http://localhost:5000/verify-otp/${id}`, {
+    fetch(`https://wendor-b4xi.onrender.com/verify-otp/${id}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

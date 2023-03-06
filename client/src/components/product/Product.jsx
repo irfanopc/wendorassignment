@@ -6,7 +6,7 @@ import CartItems from "./CartItems";
 function Product() {
   const [cartItems, setCartItems] = useState([]);
   const id = window.localStorage.getItem("id");
-
+  const navigator =useNavigate()
   const token = window.localStorage.getItem("token");
   console.log(id, token);
   console.log(cartItems);
@@ -37,7 +37,7 @@ function Product() {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios
-      .get(`http://localhost:5000/cartitems/${id}`, config)
+      .get(`https://wendor-b4xi.onrender.com/cartitems/${id}`, config)
       .then((data) => {
         //console.log(data);
         let user = data.data.cartitems;
@@ -55,14 +55,14 @@ function Product() {
       })
       .catch((error) => {
         console.log(error);
-        if (error) window.location.href = "http://localhost:3000/login";
+        if (error) navigator("/login");
       });
   }, []);
 
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/deleteitem/${id}`,
+        `https://wendor-b4xi.onrender.com/deleteitem/${id}`,
         {
           headers: {
             Authorization: "Bearer " + token,
