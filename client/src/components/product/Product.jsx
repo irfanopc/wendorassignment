@@ -1,37 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import store from "../../store";
+
 import CartItems from "./CartItems";
 
 function Product() {
   const [cartItems, setCartItems] = useState([]);
-  const id = window.localStorage.getItem("id");
+  const id = store.getState().userId;
   const navigator =useNavigate()
-  const token = window.localStorage.getItem("token");
+  const token = store.getState().token;
   console.log(id, token);
   console.log(cartItems);
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:5000/cartitems/${id}`)
-  //     .then((data) => {
-  //        //console.log(data);
-  //       let user = data.data.cartitems;
-  //       //console.log(user);
-  //       const products = user.map((obj) => {
-  //         return {
-  //           products: obj.products.map((prop) => prop),
-  //         };
-  //       });
 
-  //       products.map((data) => {
-  //         let user = data.products;
-  //         return setCartItems(user);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
   useEffect(() => {
     const config = {
       headers: { Authorization: `Bearer ${token}` },

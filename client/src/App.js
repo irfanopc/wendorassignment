@@ -5,10 +5,12 @@ import Product from './components/product/Product';
 import  Login from './components/auth/login';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CartItems from './components/product/CartItems';
+import { Provider } from "react-redux";
 import Register from './components/auth/signup';
 function App() {
   return (
     <div className="App">
+      
      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>} />
@@ -21,5 +23,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

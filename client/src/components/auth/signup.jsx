@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
   const [data, setData] = useState({
@@ -18,29 +19,22 @@ function Register() {
     if (data.password !== data.cpassword) {
       return alert(`password doesn't match`);
     }
-    fetch("https://wendor-b4xi.onrender.com/register", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    axios.post("https://wendor-b4xi.onrender.com/register", {
         username: data.username,
         password: data.password,
         confirmpassword: data.cpassword,
         phoneNumber:data.phoneNumber
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.user);
-        if (data.message) {
-          return alert(data.message);
+      })
+      .then((response) => {
+        console.log(response.data.user);
+        if (response.data.message) {
+          return alert(response.data.message);
         }
-        
-   
-
         alert(`user signup successfully`);
         navigator("/");
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
 

@@ -3,12 +3,14 @@ import axios from "axios";
 import Header from "../Header/Header";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
+import store from "../../store";
 function Home() {
  const navigator = useNavigate()
   const [imageUrl, setImageUrl] = useState("");
   console.log(imageUrl);
-  const username = window.localStorage.getItem("username");
-  const token = localStorage.getItem("token");
+  const username = store.getState().username;
+  const token = store.getState().token;
+  console.log(token);
   const onAdd = async (e) => {
     // setCartItems([...cartItems,{imageUrl : e.target.src , id : cartItems.length+1}])
     setImageUrl(e.target.src);
@@ -23,6 +25,7 @@ function Home() {
       });
 
       if (response.status === 200) {
+        
         const data = await response.json();
         console.log(data);
       } else if (response.status === 401) {

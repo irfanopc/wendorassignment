@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import store from "../../store";
 import "./Header.css";
 function Header() {
   const navigator = useNavigate();
@@ -14,10 +15,11 @@ function Header() {
         .get("https://wendor-b4xi.onrender.com/logout")
         .then((data) => {
           alert(data.data.message);
-          localStorage.removeItem("username");
-          localStorage.removeItem("id");
-          localStorage.removeItem("token");
-          window.history.pushState({}, null, "/");
+          // localStorage.removeItem("username");
+          // localStorage.removeItem("id");
+          // localStorage.removeItem("token");
+          // window.history.pushState({}, null, "/");
+          store.dispatch({ type: 'LOGOUT' });
           navigator("/");
         })
         .catch((error) => {

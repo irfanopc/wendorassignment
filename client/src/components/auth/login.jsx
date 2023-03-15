@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import store from "../../store";
+
 function Login() {
   const navigator = useNavigate();
   const [signinData, setSigninData] = useState({
@@ -30,19 +32,20 @@ function Login() {
         if (data.message) {
           return alert(data.message);
         }
-        // window.localStorage.setItem("username", data.user.username);
-        // window.localStorage.setItem("id", data.user._id)
-        // window.localStorage.setItem("token", data.token);
-        window.localStorage.setItem("id", data.user._id);
-        window.localStorage.setItem("username", data.user.username);
-        window.localStorage.setItem("token", data.token);
+        store.dispatch({
+          type: 'LOGIN_SUCCESS',
+          payload: {
+            user: data.user,
+            token: data.token,
+          
+          },
+        });
       });
   };
 
- 
   const onVerify = (e) => {
     e.preventDefault();
-    const id = window.localStorage.getItem("id");
+    const id = store.getState().userId;
     console.log(id);
     fetch(`https://wendor-b4xi.onrender.com/verify-otp/${id}`, {
       method: "post",
